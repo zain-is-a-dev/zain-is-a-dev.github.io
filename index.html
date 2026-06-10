@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAIN — Portfolio</title>
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        :root {
+            --bg-color: #000000;
+            --card-bg: #0b0b0b;
+            --border-color: #1a1a1a;
+            --accent-color: #c5a880; 
+            --text-main: #ffffff;
+            --text-muted: #707070;
+            --text-dark: #3f3f3f;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            padding-bottom: 40px;
+        }
+
+        .serif-font {
+            font-family: 'Times New Roman', Times, serif;
+            letter-spacing: 2px;
+        }
+
+        .app-container {
+            max-width: 480px; 
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+        }
+
+        .menu-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 32px 0 48px;
+            position: relative;
+        }
+
+        .hero-banner {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 60%, rgba(0,0,0,1) 100%), 
+                        url('https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
+            border-radius: 4px;
+            position: relative;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        .japanese-watermark {
+            position: absolute;
+            top: 20px;
+            left: 16px;
+            writing-mode: vertical-rl;
+            text-combine-upright: all;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 6px;
+            opacity: 0.6;
+        }
+
+        .red-cross {
+            position: absolute;
+            bottom: 40px;
+            left: 20px;
+            color: #bd2c2c;
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .hero-meta-text {
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 400;
+            color: var(--accent-color);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .hero-roles {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .manifesto-name {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .manifesto-quote {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        section {
+            padding: 40px 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .section-action {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 70px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .about-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #111111;
+            border: 1px solid var(--border-color);
+            /* This links to your local eye image file */
+            background-image: url('my-eye.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .about-content h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 14px;
+            height: 30px; 
+        }
+
+        .typing-cursor {
+            font-weight: 300;
+            color: var(--accent-color);
+            animation: blink 0.8s infinite;
+        }
+
+        .about-bio {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .about-footer {
+            font-style: italic;
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .skills-category-title {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-top: 20px;
+        }
+
+        .skills-category-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .tag-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .accordion-trigger {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            cursor: pointer;
+        }
+
+        .accordion-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .accordion-num {
+            font-size: 0.75rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .accordion-label {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .accordion-icon {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-content p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            padding-bottom: 20px;
+            padding-left: 32px;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 200px;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .project-card {
+            background: linear-gradient(180deg, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop') center/cover;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            height: 380px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .project-num {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .project-dot {
+            position: absolute;
+            top: 26px;
+            right: 24px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+        }
+
+        .project-tagline {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .project-title {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 16px;
+        }
+
+        .project-link-left {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+        }
+
+        .project-link-action {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quote-divider {
+            padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .quote-block {
+            max-width: 85%;
+        }
+
+        .quote-block.right {
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .quote-text {
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .quote-author {
+            font-size: 0.75rem;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+        }
+
+        .contact-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .contact h2 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .contact-desc {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 0 12px 0;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-bottom-color: var(--accent-color);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 16px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            margin-top: 40px;
+        }
+
+        .submit-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .socials-list {
+            margin-top: 16px;
+        }
+
+        .social-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .social-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-value {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .social-value:hover {
+            color: var(--accent-color);
+        }
+
+        footer {
+            padding: 60px 0 20px;
+            text-align: center;
+        }
+
+        .footer-quote-wrap {
+            text-align: left;
+            margin-bottom: 60px;
+        }
+
+        .footer-tagline {
+            font-size: 0.75rem;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+        }
+
+        .footer-logo {
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--text-main);
+            letter-spacing: 8px;
+            margin-bottom: 12px;
+        }
+
+        .copyright {
+            font-size: 0.65rem;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <header>
+            <div class="logo serif-font">+ ZAIN</div>
+            <div class="menu-btn">☰</div>
+        </header>
+
+        <main class="hero">
+            <div class="hero-banner">
+                <div class="japanese-watermark">ヨハン・リーベルト</div>
+                <div class="red-cross">+</div>
+            </div>
+            
+            <p class="hero-meta-text">EXIST ONLY AS SOMEONE'S MEMORY.</p>
+            <h1 class="hero-title serif-font">ZAIN</h1>
+            <p class="hero-roles">DESIGNER · DEVELOPER · STRATEGIST</p>
+            
+            <div style="margin-top: 40px;">
+                <p class="manifesto-name">ZAIN</p>
+                <p class="manifesto-quote">I don't seek meaning.<br>I create.</p>
+            </div>
+        </main>
+
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">ABOUT ME</h2>
+                <span class="section-action">+</span>
+            </div>
+            <div class="about-grid">
+                <div class="about-avatar"></div>
+                <div class="about-content">
+                    <h3>I'm <span id="dynamic-name">Zain</span><span class="typing-cursor">|</span></h3>
+                    <p class="about-bio">
+                        Known online as <strong>ZAIN</strong> and <strong>ZAINPY</strong>. Self-taught, driven by curiosity, and always building. Started with design, found my way into deep code, and kept pushing boundaries. Today, I work across interfaces, secure systems, custom automation, and whatever complex problem demands a solution.
+                    </p>
+                    <p class="about-footer">Minimal. Intentional. Timeless.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">SKILLS</h2>
+                <span class="section-action">VIEW ALL ›</span>
+            </div>
+            
+            <h3 class="skills-category-title">DESIGN</h3>
+            <div class="tag-wrapper">
+                <span class="skill-tag">⚡ UI/UX DESIGN</span>
+                <span class="skill-tag">🎨 FIGMA</span>
+                <span class="skill-tag">💎 BRAND ARCHITECTURE</span>
+            </div>
+
+            <h3 class="skills-category-title">DEVELOPMENT</h3>
+            <div class="tag-wrapper">
+                <span class="skill-tag">🐍 PYTHON DEV</span>
+                <span class="skill-tag">💻 FRONTEND ARCH.</span>
+                <span class="skill-tag">🤖 BOT INFRASTRUCTURE</span>
+            </div>
+
+            <h3 class="skills-category-title">SYSTEMS & INTEGRATION</h3>
+            <div class="tag-wrapper">
+                <span class="skill-tag">⚡ AUTOMATION</span>
+                <span class="skill-tag">🔗 API INTEGRATION</span>
+                <span class="skill-tag">💾 DATABASE DESIGN</span>
+            </div>
+
+            <h3 class="skills-category-title">DIGITAL OPERATIONS</h3>
+            <div class="tag-wrapper">
+                <span class="skill-tag">🌐 SOCIAL MEDIA</span>
+                <span class="skill-tag">🔒 ACCOUNT SECURITY</span>
+                <span class="skill-tag">⚠️ PROBLEM RESOLUTION</span>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">WHAT I DO</h2>
+                <span class="section-action">▼</span>
+            </div>
+
+            <div class="accordion-item active">
+                <div class="accordion-trigger" onclick="toggleAccordion(this)">
+                    <div class="accordion-left">
+                        <span class="accordion-num">01</span>
+                        <span class="accordion-label">DESIGN</span>
+                    </div>
+                    <span class="accordion-icon">▲</span>
+                </div>
+                <div class="accordion-content">
+                    <p>UI/UX Design, Figma & Branding — shaping identities and digital spaces through purposeful visuals, hyper-refined interfaces, and design systems that feel as flawless as they look.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-trigger" onclick="toggleAccordion(this)">
+                    <div class="accordion-left">
+                        <span class="accordion-num">02</span>
+                        <span class="accordion-label">DEVELOPMENT</span>
+                    </div>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Python & Custom Engineering — architecting clean, powerful codebases, responsive web applications, and intelligent automation scripts built for scale.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-trigger" onclick="toggleAccordion(this)">
+                    <div class="accordion-left">
+                        <span class="accordion-num">03</span>
+                        <span class="accordion-label">SYSTEM & INTEGRATION</span>
+                    </div>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Automations & APIs — bridging complex third-party tools and structural databases to build seamless, self-sustaining ecosystems that run round the clock.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-trigger" onclick="toggleAccordion(this)">
+                    <div class="accordion-left">
+                        <span class="accordion-num">04</span>
+                        <span class="accordion-label">DIGITAL OPERATIONS</span>
+                    </div>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Digital Management & Recovery — resolving high-level platform vulnerabilities, digital asset optimization, and navigating platform algorithms seamlessly.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">SELECTED WORK</h2>
+                <span class="section-action">VIEW ALL ›</span>
+            </div>
+
+            <div class="project-card">
+                <span class="project-num">01</span>
+                <span class="project-dot"></span>
+                
+                <p class="project-tagline">PROJECT</p>
+                <h3 class="project-title serif-font">ZainpyEngine</h3>
+                
+                <div class="project-footer">
+                    <span class="project-link-left">TESTING</span>
+                    <a href="#" class="project-link-action">VIEW PROJECT ➔</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="quote-divider">
+            <div class="quote-block">
+                <p class="quote-text">"I don't have a name, and I don't need one."</p>
+                <p class="quote-author">— Johan Liebert</p>
+            </div>
+            <div class="quote-block right">
+                <p class="quote-text">"A person's value has nothing to do with life or death."</p>
+                <p class="quote-author">— Johan Liebert</p>
+            </div>
+        </div>
+
+        <section class="contact">
+            <p class="contact-subtitle">+ LET'S CREATE SOMETHING MEANINGFUL.</p>
+            <h2>CONTACT</h2>
+            <p class="contact-desc">I'M ALWAYS OPEN TO NEW OPPORTUNITIES, COLLABORATIONS OR JUST A GOOD CONVERSATION.</p>
+
+            <form onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label>NAME</label>
+                    <input type="text" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label>EMAIL</label>
+                    <input type="email" placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label>SUBJECT</label>
+                    <input type="text" placeholder="What's this about?">
+                </div>
+                <div class="form-group">
+                    <label>MESSAGE</label>
+                    <textarea rows="3" placeholder="Write your message here..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <span>SEND MESSAGE</span>
+                    <span>+</span>
+                </button>
+            </form>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">GET IN TOUCH</h2>
+                <span class="section-action">+</span>
+            </div>
+
+            <div class="socials-list">
+                <div class="social-row">
+                    <span class="social-label">✉️ EMAIL</span>
+                    <a href="mailto:zainpy@gmail.com" class="social-value">zainpy@gmail.com</a>
+                </div>
+                <div class="social-row">
+                    <span class="social-label">✈️ TELEGRAM</span>
+                    <a href="https://t.me/zainpy" target="_blank" class="social-value">@zainpy</a>
+                </div>
+                <div class="social-row">
+                    <span class="social-label">📸 INSTAGRAM</span>
+                    <a href="https://instagram.com/itx._hasham.ali" target="_blank" class="social-value">itx._hasham.ali</a>
+                </div>
+                <div class="social-row">
+                    <span class="social-label">👾 DISCORD</span>
+                    <a href="#" class="social-value">@5xhz</a>
+                </div>
+                <div class="social-row">
+                    <span class="social-label">🐙 GITHUB</span>
+                    <a href="
